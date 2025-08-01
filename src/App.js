@@ -1,22 +1,42 @@
 import React from 'react';
 import { Award, Book, Briefcase, CheckCircle, ChevronRight, Clock, Edit, FileText, Home, Layers, LogOut, Menu, Moon, PlusCircle, Settings, Star, Sun, Trash2, User, UserPlus, Users, Video, X, ListVideo, HelpCircle, Upload } from 'lucide-react';
 
-// --- FONT SETUP ---
-const FontStyles = () => (
-    <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap');
-        body, .font-sarabun {
-            font-family: 'Sarabun', sans-serif;
-        }
-    `}</style>
-);
+// --- FONT & STYLES SETUP ---
+const Styles = () => {
+    React.useEffect(() => {
+        // Add Google Fonts
+        const fontLink = document.createElement('link');
+        fontLink.href = 'https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600;700&display=swap';
+        fontLink.rel = 'stylesheet';
+        document.head.appendChild(fontLink);
+
+        // Add Tailwind CSS
+        const tailwindScript = document.createElement('script');
+        tailwindScript.src = 'https://cdn.tailwindcss.com';
+        document.head.appendChild(tailwindScript);
+
+        // Add custom body font style
+        const style = document.createElement('style');
+        style.textContent = `body, .font-sarabun { font-family: 'Sarabun', sans-serif; }`;
+        document.head.appendChild(style);
+
+        return () => {
+            document.head.removeChild(fontLink);
+            document.head.removeChild(tailwindScript);
+            document.head.removeChild(style);
+        };
+    }, []);
+
+    return null;
+};
+
 
 // --- SUPABASE CLIENT SETUP ---
 // IMPORTANT: For a real deployment, you would use Environment Variables.
 // For this preview environment, replace the placeholder values below.
 // You can find these in your Supabase project settings under "API".
 const supabaseUrl = 'https://scpznthwozpetayzsdbs.supabase.co'; // Replace with your Supabase Project URL
-const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNjcHpudGh3b3pwZXRheXpzZGJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM3MDc2MzksImV4cCI6MjA2OTI4MzYzOX0.nh-jewK5Li549it0kEs1ZyoGaqvmJ7Q5mNNs7emfoO0'; // Replace with your Supabase Anon Key
+const supabaseAnonKey = 'https://eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNjcHpudGh3b3pwZXRheXpzZGJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM3MDc2MzksImV4cCI6MjA2OTI4MzYzOX0.nh-jewK5Li549it0kEs1ZyoGaqvmJ7Q5mNNs7emfoO0'; // Replace with your Supabase Anon Key
 
 // --- MOCK DATA (For initial database seeding if needed, now handled in Supabase dashboard) ---
 const mockTestimonials = [
@@ -153,7 +173,7 @@ const AppProvider = ({ children }) => {
         ];
 
         return () => {
-            subscriptions.forEach(sub => sub.unsubscribe());
+            subscriptions.forEach(sub => supabase.removeChannel(sub));
         };
 
     }, [supabase]);
@@ -669,7 +689,7 @@ const RegisterPage = () => {
 export default function App() {
     return (
         <AppProvider>
-            <FontStyles />
+            <Styles />
             <MainContent />
         </AppProvider>
     );
@@ -714,4 +734,3 @@ const MainContent = () => {
         </div>
     );
 }
-
