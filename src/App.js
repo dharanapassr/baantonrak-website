@@ -5,8 +5,8 @@ import { Award, Book, Briefcase, CheckCircle, ChevronRight, Clock, Edit, FileTex
 // IMPORTANT: For a real deployment, you would use Environment Variables.
 // For this preview environment, replace the placeholder values below.
 // You can find these in your Supabase project settings under "API".
-const supabaseUrl = 'YOUR_SUPABASE_URL'; // Replace with your Supabase Project URL
-const supabaseAnonKey = 'YOUR_SUPABASE_ANON_KEY'; // Replace with your Supabase Anon Key
+const supabaseUrl = 'https://scpznthwozpetayzsdbs.supabase.co'; // Replace with your Supabase Project URL
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNjcHpudGh3b3pwZXRheXpzZGJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NTM3MDc2MzksImV4cCI6MjA2OTI4MzYzOX0.nh-jewK5Li549it0kEs1ZyoGaqvmJ7Q5mNNs7emfoO0'; // Replace with your Supabase Anon Key
 
 // --- MOCK DATA (For initial database seeding if needed, now handled in Supabase dashboard) ---
 const mockTestimonials = [
